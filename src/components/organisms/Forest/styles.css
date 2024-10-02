@@ -1,0 +1,47 @@
+.forest-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0; /* 背景のビデオを他のコンテンツの後ろに配置 */
+}
+
+.video {
+  width: 100%;
+  height: 125vh;
+  object-fit: cover;
+}
+
+.overlay {
+  position: relative;
+  z-index: 1;
+  color: white; /* テキストの色を変更 */
+  text-align: center;
+  padding: 20px;
+}
+
+.forest-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  padding: 50px;
+  margin-bottom: -50vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+  color: #a5d6a7;
+  margin-top: 300px;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
