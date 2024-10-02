@@ -5,45 +5,42 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function Home() {
-  const mountRef = useRef<HTMLDivElement | null>(null);
+  const magicalMountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const currentRef = mountRef.current; // mountRef.currentを変数に保存
+    const sparklyCanvas = magicalMountRef.current;
 
-    if (currentRef) {
-      // mountRef.current が null でないか確認
-      // シーン、カメラ、レンダラーをセットアップ
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
+    if (sparklyCanvas) {
+      const happyScene = new THREE.Scene();
+      const rainbowCamera = new THREE.PerspectiveCamera(
+        50,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       );
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      currentRef.appendChild(renderer.domElement);
+      const magicalRenderer = new THREE.WebGLRenderer();
+      magicalRenderer.setSize(window.innerWidth, window.innerHeight);
+      sparklyCanvas.appendChild(magicalRenderer.domElement);
 
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+      const cuteGeometry = new THREE.BoxGeometry();
+      const bubblyMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      const happyCube = new THREE.Mesh(cuteGeometry, bubblyMaterial);
+      happyScene.add(happyCube);
 
-      camera.position.z = 5;
+      rainbowCamera.position.z = 5;
 
-      const animate = function () {
-        requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render(scene, camera);
+      const animateCuteCube = function () {
+        requestAnimationFrame(animateCuteCube);
+        happyCube.rotation.x += 0.01;
+        happyCube.rotation.y += 0.01;
+        magicalRenderer.render(happyScene, rainbowCamera);
       };
 
-      animate();
+      animateCuteCube();
 
-      // クリーンアップ
       return () => {
-        if (currentRef) {
-          currentRef.removeChild(renderer.domElement);
+        if (sparklyCanvas) {
+          sparklyCanvas.removeChild(magicalRenderer.domElement);
         }
       };
     }
@@ -51,31 +48,33 @@ export default function Home() {
 
   return (
     <>
-      <div ref={mountRef} />
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+      <div ref={magicalMountRef} />
+      <div className="absolute top-0 flex flex-col items-center justify-center min-h-screen p-4 gap-8 sm:p-8">
+        <main className="flex flex-col gap-8 text-center sm:text-left sm:flex-row sm:gap-12">
           <Image
-            className="dark:invert"
-            src="https://nextjs.org/icons/next.svg"
-            alt="Next.js logo"
+            className="w-40 h-40"
+            src="/images/schnya.webp"
+            alt="site logo"
             width={180}
-            height={38}
+            height={180}
             priority
           />
-          <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <ol className="list-inside list-decimal text-sm font-[family-name:var(--font-geist-mono)]">
             <li className="mb-2">
-              Get started by editing{" "}
+              Try making a
               <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-                src/app/page.tsx
-              </code>
-              .
+                new dish
+              </code>{" "}
+              from your favorite recipe book! 🍽️
             </li>
-            <li>Save and see your changes instantly.</li>
+            <li>
+              Serve the dish to friends or family and enjoy the smiles! ✨
+            </li>
           </ol>
 
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
             <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm h-10 px-4 sm:h-12 sm:px-5"
               href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
@@ -87,21 +86,21 @@ export default function Home() {
                 width={20}
                 height={20}
               />
-              Deploy now
+              Find a Recipe Now!
             </a>
             <a
-              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm h-10 px-4 sm:h-12 sm:px-5 sm:min-w-44"
               href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Read our docs
+              Check the Grocery List!
             </a>
           </div>
         </main>
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <footer className="flex flex-wrap justify-center gap-4 p-4 text-sm text-gray-500 sm:justify-start sm:text-base sm:p-8">
           <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            className="flex items-center gap-2 hover:underline"
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -113,10 +112,10 @@ export default function Home() {
               width={16}
               height={16}
             />
-            Learn
+            Cooking Tips 📖💫
           </a>
           <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            className="flex items-center gap-2 hover:underline"
             href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -128,10 +127,10 @@ export default function Home() {
               width={16}
               height={16}
             />
-            Examples
+            Dessert Recipes 💡✨
           </a>
           <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            className="flex items-center gap-2 hover:underline"
             href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -143,7 +142,7 @@ export default function Home() {
               width={16}
               height={16}
             />
-            Go to nextjs.org →
+            Cooking Blog 🌍💖
           </a>
         </footer>
       </div>
