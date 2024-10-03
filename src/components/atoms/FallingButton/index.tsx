@@ -23,16 +23,18 @@ export const FallingButton: React.FC<Props> = ({
 
   const handleClick: MouseEventHandler<HTMLButtonElement> | undefined = (e) => {
     setFall(true);
-    setTimeout(() => {
-      setFall(false); // アニメーション後にリセット
-    }, 1000); // アニメーションの持続時間に合わせてリセット
+    setTimeout(() => setFall(false), 10000);
 
     onClick?.(e);
   };
 
   return (
     <button
-      className={cn(`falling-button ${fall ? "fall" : ""}`, className)}
+      className={cn(
+        "flex items-center justify-center w-10 h-10",
+        `falling-button ${fall ? "fall" : ""}`,
+        className
+      )}
       onClick={handleClick}
       {...props}
     >

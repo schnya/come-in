@@ -1,5 +1,3 @@
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
@@ -8,9 +6,16 @@ type Props = {
   alt: string;
   mediaItemId: string;
   className?: string;
+  layout?: string | undefined;
+  objectFit?: string | undefined;
 };
 
-export const MediaItem: React.FC<Props> = ({ alt, mediaItemId, className }) => {
+export const MediaItem: React.FC<Props> = ({
+  alt,
+  mediaItemId,
+  className,
+  ...props
+}) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["mediaItem", mediaItemId],
     queryFn: async () => {
@@ -27,13 +32,17 @@ export const MediaItem: React.FC<Props> = ({ alt, mediaItemId, className }) => {
 
   if (!data) return;
 
+  const mediaMetadata = {
+    width: Number(data.mediaMetadata.width),
+    height: Number(data.mediaMetadata.height),
+  };
+
   return (
     <Image
       alt={alt}
       className={className}
-      src={data.baseUrl}
-      width={Number(data?.mediaMetadata.width)}
-      height={Number(data?.mediaMetadata.height)}
+      src={data.baseUrl + `=w${mediaMetadata.width}-h${mediaMetadata.height}`}
+      {...props}
     />
   );
 };

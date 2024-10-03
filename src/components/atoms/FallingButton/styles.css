@@ -1,20 +1,15 @@
 .falling-button {
-  font-size: 26px;
+  background-color: rgba(255, 255, 255, 0.3);
   border: none;
-  border-radius: 14px;
-  color: white;
-  cursor: pointer;
+  border-radius: 18px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(255, 105, 180, 0.5),
     inset 0 0 8px rgba(255, 255, 255, 0.6), 0 0 12px rgba(255, 182, 193, 0.8);
-
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  position: relative;
   animation: appear 1s ease-out forwards;
 }
 
 .falling-button:hover {
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4),
-    0 12px 24px rgba(255, 105, 180, 0.7),
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(255, 105, 180, 0.7),
     inset 0 0 10px rgba(255, 255, 255, 0.8), 0 0 18px rgba(255, 182, 193, 1);
   transform: scale(1.05); /* ホバーで拡大 */
 }

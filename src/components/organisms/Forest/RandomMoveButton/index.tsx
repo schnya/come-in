@@ -1,35 +1,58 @@
-"use client";
-
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { IoReload } from "react-icons/io5";
+import { FaShuffle } from "react-icons/fa6";
 
 import { FallingButton } from "@/components/atoms/FallingButton";
 
-const pages = ["/", "/hoge", "/fuga", "/piyo"];
+import { useRandomMove } from "./hooks";
+
+const pages = ["/", "/hoge", "/fuga", "/piyo", "/life-flourished-here"];
 
 export const RandomMoveButton = () => {
   const router = useRouter();
-  const [visible, setVisible] = useState(false);
+  const { visible, position, cheersToRandomPosition, fetchRandomPage } =
+    useRandomMove(pages);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(true);
-    }, 1000);
-  });
-
-  const hoge = () => {
-    const randomIndex = Math.floor(Math.random() * pages.length);
-    const randomPage = pages[randomIndex];
-    router.push("/demo" + randomPage);
+  const navigateToRandomPage = () => {
+    const randomPage = fetchRandomPage();
+    router.push(`/demo${randomPage}`);
+    cheersToRandomPosition();
   };
 
   return (
     <>
       {visible && (
-        <div className="z-10 absolute bottom-1/4 right-1/4">
-          <FallingButton onClick={hoge}>
-            <IoReload />
+        <div className="fixed z-50" style={position}>
+          <FallingButton onClick={navigateToRandomPage}>
+            <svg width="24" height="21.01">
+              <defs>
+                <linearGradient
+                  id="gradient1"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#4f46e5", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="50%"
+                    style={{ stopColor: "#000000", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#d1006b", stopOpacity: 1 }}
+                  />
+                </linearGradient>
+              </defs>
+              <g fill="url(#gradient1)">
+                <FaShuffle
+                  size={24}
+                  fill="linear-gradient(#4f46e5, #ccc, #d1006b)"
+                />
+              </g>
+            </svg>
           </FallingButton>
         </div>
       )}

@@ -122,9 +122,9 @@ export default function ThreeScene() {
     animate();
 
     // クリックで落下開始
-    window.addEventListener("click", () => {
+    setTimeout(() => {
       falling = true;
-    });
+    }, 5000);
 
     // リサイズ対応
     window.addEventListener("resize", () => {
