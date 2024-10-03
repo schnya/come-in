@@ -1,11 +1,11 @@
 import axios from "axios";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 import { getOAuth2Client } from "@/lib/OAuth2/utils";
 import { handleOopsieError } from "@/lib/utils";
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { mediaItemId: string } }
 ) {
   if (!params.mediaItemId) {
