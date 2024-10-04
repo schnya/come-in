@@ -1,4 +1,7 @@
+import dotenv from "dotenv";
 import { google } from "googleapis";
+
+dotenv.config();
 
 export async function getOAuth2Client() {
   const magicalOAuthClient = new google.auth.OAuth2(
