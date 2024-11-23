@@ -40,12 +40,26 @@ export const useSliderEl = (tileData: TileData, direction: 1 | -1) => {
   }, [tileRefs]);
 
   useEffect(() => {
+    let startY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    };
     const handleScroll = (e: { deltaY: number }) => {
       setContainerTranslateY((prev) => prev + e.deltaY * direction);
     };
+    const handleTouchMove = (e: TouchEvent) => {
+      handleScroll({ deltaY: startY - e.touches[0].clientY });
+      startY = e.touches[0].clientY;
+    };
 
     window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [direction]);
 
   useEffect(() => {
