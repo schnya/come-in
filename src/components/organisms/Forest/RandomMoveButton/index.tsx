@@ -5,7 +5,14 @@ import { FallingButton } from "@/components/atoms/FallingButton";
 
 import { useRandomMove } from "./hooks";
 
-const pages = ["/", "/hoge", "/fuga", "/piyo", "/life-flourished-here"];
+const pages = [
+  "/",
+  "/donesia",
+  "/hoge",
+  "/fuga",
+  "/piyo",
+  "/life-flourished-here",
+];
 
 export const RandomMoveButton = () => {
   const router = useRouter();
