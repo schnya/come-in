@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
-import { useSliderEl } from "./hook";
+import { TileData, useSliderEl } from "./hook";
 
 type Props = {
-  tileData: (string | string[])[];
+  tileData: TileData;
   direction?: 1 | -1;
   containerStyle?: string;
   tileStyle?: string;
@@ -16,7 +16,7 @@ export const SliderEl: React.FC<Props> = ({
   tileStyle,
 }) => {
   const { containerRef, tileRefs, containerTranslateY, tileVariants } =
-    useSliderEl(direction);
+    useSliderEl(tileData, direction);
 
   return (
     <motion.div
@@ -34,6 +34,7 @@ export const SliderEl: React.FC<Props> = ({
           ref: (el: HTMLDivElement | HTMLUListElement | null) => {
             if (el) tileRefs.current[index] = el;
           },
+          custom: index,
           variants: tileVariants,
           initial: "hidden",
           animate: "visible",

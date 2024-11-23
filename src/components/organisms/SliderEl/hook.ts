@@ -1,10 +1,25 @@
 import { circOut } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-export const useSliderEl = (direction: 1 | -1) => {
+export type TileData = (string | string[])[];
+
+export const useSliderEl = (tileData: TileData, direction: 1 | -1) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const tileRefs = useRef<(HTMLDivElement | HTMLUListElement)[]>([]);
+  const [duration, setDuration] = useState(1);
   const [containerTranslateY, setContainerTranslateY] = useState(0);
+  const [tileTranslateY, setTileTranslateY] = useState(tileData.map(() => 0));
+
+  const tileVariants = {
+    hidden: { opacity: 0, y: 500 * direction },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: tileTranslateY[index],
+      transition: { duration, ease: circOut },
+    }),
+  };
+
+  useEffect(() => setDuration(0), []);
 
   useEffect(() => {
     const adjustFontSize = () => {
@@ -44,46 +59,51 @@ export const useSliderEl = (direction: 1 | -1) => {
       if (!firstTile || !lastTile) return;
 
       const containerHeight = containerRef.current!.offsetHeight;
-      // const firstTileTop = firstTile.getBoundingClientRect().top;
-      // const lastTileBottom = lastTile.getBoundingClientRect().bottom;
+      const firstTileBottom = firstTile.getBoundingClientRect().bottom;
+      const lastTileTop = lastTile.getBoundingClientRect().top;
 
-      // if (-50 < firstTileTop) {
-      //   tileRefs.current = [lastTile, ...tiles.slice(0, tiles.length - 1)];
-      //   const index = tileData.findIndex((t) => t === lastTile.innerText);
-      //   setTileTranslateY((prev) => {
-      //     const updated = [...prev];
-      //     updated[index] = -containerHeight;
+      if (lastTileTop + 70 > containerHeight) {
+        tileRefs.current = [lastTile, ...tiles.slice(0, tiles.length - 1)];
+        const index = tileData.findIndex((t) => t === lastTile.innerText);
+        setTileTranslateY((prev) => {
+          const updated = [...prev];
+          updated[index] = (() =>
+            updated[index] === -containerHeight
+              ? containerHeight
+              : updated[index] === containerHeight
+              ? 0
+              : -containerHeight)();
 
-      //     return updated;
-      //   });
-      //   lastTile.style.transform = `translateY(${-containerHeight}px)`;
-      // } else if (lastTileBottom < containerHeight - 50) {
-      //   console.log("lastTileBottom < containerHeight - 50");
-      //   console.log(firstTile.innerText[0], lastTile.innerText[0]);
+          return updated;
+        });
+      } else if (firstTileBottom < -70) {
+        tileRefs.current = [...tiles.slice(1), firstTile];
+        const index = tileData.findIndex((t) => t === firstTile.innerText);
+        setTileTranslateY((prev) => {
+          const updated = [...prev];
+          updated[index] = (() =>
+            updated[index] === -containerHeight
+              ? 0
+              : updated[index] === 0
+              ? containerHeight
+              : -containerHeight)();
 
-      //   tileRefs.current = [...tiles.slice(1), firstTile];
-      //   firstTile.style.transform = `translateY(${containerHeight}px)`;
-      // }
+          return updated;
+        });
+      }
 
       if (containerTranslateY > containerHeight) {
         setContainerTranslateY(-containerHeight);
+        setTileTranslateY((prev) => prev.map(() => 0));
       } else if (containerTranslateY + containerHeight < 0) {
         setContainerTranslateY(containerHeight);
+        setTileTranslateY((prev) => prev.map(() => 0));
       }
     };
 
     const raf = requestAnimationFrame(updatePosition);
     return () => cancelAnimationFrame(raf);
-  }, [containerTranslateY]);
-
-  const tileVariants = {
-    hidden: { opacity: 0, y: 500 * direction },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: circOut },
-    },
-  };
+  }, [containerTranslateY, tileData]);
 
   return {
     containerRef,
