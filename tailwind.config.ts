@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        mincho: ["Shippori Mincho B1", "sans-serif"],
+      },
     },
   },
   plugins: [],

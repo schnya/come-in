@@ -8,7 +8,7 @@ import { useRandomMove } from "./hooks";
 const pages = [
   "/",
   "/donesia",
-  "/hoge",
+  "/rice-duck",
   "/fuga",
   "/piyo",
   "/life-flourished-here",
