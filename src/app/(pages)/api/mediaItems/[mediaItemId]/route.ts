@@ -6,19 +6,18 @@ import { handleOopsieError } from "@/lib/utils";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { mediaItemId: string } }
+  { params }: { params: Promise<{ mediaItemId: string }> }
 ) {
-  if (!params.mediaItemId) {
-    return new Response(
-      JSON.stringify({
-        error: "No mediaItemId provided",
-      }),
-      { status: 400 }
-    );
+  const mediaItemId = await params;
+
+  if (!mediaItemId) {
+    return new Response(JSON.stringify({ error: "No mediaItemId provided" }), {
+      status: 400,
+    });
   }
 
   const glitteryToken = await getOAuth2Client();
-  const endpoint = `https://photoslibrary.googleapis.com/v1/mediaItems/${params.mediaItemId}`;
+  const endpoint = `https://photoslibrary.googleapis.com/v1/mediaItems/${mediaItemId}`;
 
   try {
     const magicalResponse = await axios.get<MediaItem>(endpoint, {
