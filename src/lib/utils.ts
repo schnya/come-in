@@ -1,19 +1,24 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function handleOopsieError(oopsie: unknown): Response {
-  if (oopsie instanceof Error) {
-    return new Response(JSON.stringify({ error: oopsie.message }), {
-      status: 500,
-    });
-  } else {
-    return new Response(
-      JSON.stringify({ error: "An unknown oopsie occurred" }),
-      { status: 500 }
-    );
-  }
+export function formatDate(date: Date | string | number) {
+  return new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+}
+
+export function formatDateTime(date: Date | string | number) {
+  return new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(date));
 }
