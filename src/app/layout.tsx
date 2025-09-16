@@ -15,23 +15,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Come In - Modern Next.js App",
-  description: "A modern Next.js 15 application with TypeScript, Tailwind CSS, and the latest features",
-  keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Modern Web Development"],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
+  title: "応答願う - Come In",
+  description: "宇宙飛行士からのメッセージ。あなたの学習への参加をお待ちしています。",
+  keywords: ["応答願う", "宇宙", "学習", "Next.js", "React", "TypeScript", "宇宙飛行士"],
+  authors: [{ name: "Cosmic Developer" }],
+  creator: "Cosmic Developer",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     locale: "ja_JP",
     url: "https://your-domain.com",
-    title: "Come In - Modern Next.js App",
-    description: "A modern Next.js 15 application with TypeScript, Tailwind CSS, and the latest features",
-    siteName: "Come In",
+    title: "応答願う - Come In",
+    description: "宇宙飛行士からのメッセージ。あなたの学習への参加をお待ちしています。",
+    siteName: "応答願う",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Come In - Modern Next.js App",
-    description: "A modern Next.js 15 application with TypeScript, Tailwind CSS, and the latest features",
+    title: "応答願う - Come In",
+    description: "宇宙飛行士からのメッセージ。あなたの学習への参加をお待ちしています。",
   },
   robots: {
     index: true,

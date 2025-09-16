@@ -1,27 +1,66 @@
+import { BookOpen, Code, DoorOpen, Globe, Hand, Mountain, Palette, Sparkles, Zap } from "lucide-react";
+
+import { InteractiveButton } from "@/components/interactive-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Code, Globe, Mountain, Palette, Zap } from "lucide-react";
+import { AmbientSound } from "@/components/ambient-sound";
+import { CosmicSound } from "@/components/cosmic-sound";
+import { SimpleSound } from "@/components/simple-sound";
+import { CosmicVisualizer } from "@/components/cosmic-visualizer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Cosmic Visual Effects */}
+      <CosmicVisualizer />
+      
+      {/* Ambient Sound Effects */}
+      <AmbientSound />
+      <CosmicSound />
+      <SimpleSound />
+      
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Welcome to{" "}
-            <span className="text-primary">Come In</span>
-          </h1>
+          {/* Welcome Sign with Door */}
+          <div className="flex justify-center items-center gap-4 mb-8">
+            <DoorOpen className="h-12 w-12 text-primary animate-pulse" />
+            <div className="relative">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                <span className="text-primary relative">
+                  Come In - Over
+                  <Sparkles className="absolute -top-2 -right-2 h-6 w-6 text-yellow-500 animate-twinkle" />
+                </span>
+              </h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <Hand className="h-6 w-6 text-primary animate-wave" />
+              </div>
+            </div>
+            <DoorOpen className="h-12 w-12 text-primary animate-float" />
+          </div>
+          
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Explore diverse learning experiences and specialized tools built with modern web technologies.
+            🚀 <strong>応答願う</strong> - 命の地表から打ち上げられて、随分経つ
           </p>
+          <p className="text-lg text-muted-foreground/80 mb-8 max-w-2xl mx-auto italic">
+            ずっと 通り過ぎる星の 数を数えて 飛んできた<br />
+            その度覚えた 音を繋ぎ メロディーを送る
+          </p>
+          
           <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" className="text-lg px-8" asChild>
-              <a href="/learn">学習を始める</a>
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-              <a href="/climbing">クライミング辞典</a>
-            </Button>
+            <InteractiveButton 
+              href="/learn"
+              className="text-lg px-8"
+            >
+              学習を始める - どうぞ
+            </InteractiveButton>
+            <InteractiveButton 
+              href="/climbing"
+              variant="outline"
+              className="text-lg px-8"
+            >
+              クライミング辞典 - 応答願う
+            </InteractiveButton>
           </div>
         </div>
       </section>
@@ -166,18 +205,39 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="bg-muted rounded-lg p-8 text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">Ready to explore?</h2>
-          <p className="text-muted-foreground mb-6">
-            Choose your path and start your learning journey with our specialized tools and resources.
+        <div className="bg-muted rounded-lg p-8 text-center max-w-2xl mx-auto relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute top-4 left-4">
+            <DoorOpen className="h-8 w-8 text-primary/20 animate-pulse" />
+          </div>
+          <div className="absolute top-4 right-4">
+            <Hand className="h-8 w-8 text-primary/20 animate-wave" />
+          </div>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <Sparkles className="h-6 w-6 text-yellow-500/30 animate-bounce" />
+          </div>
+          
+          <h2 className="text-2xl font-bold mb-4 relative z-10">
+            🚀 通信試みる - 応答願う
+          </h2>
+          <p className="text-muted-foreground mb-4 relative z-10">
+            本日も通信試みるが 応答は無し
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" asChild>
-              <a href="/learn">学習を始める</a>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href="/climbing">クライミング辞典</a>
-            </Button>
+          <p className="text-muted-foreground/80 mb-6 relative z-10 italic">
+            わたしは どんなに離れても いつもあなたの 周回軌道上
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap relative z-10">
+            <InteractiveButton 
+              href="/learn"
+            >
+              学習を始める - どうぞ
+            </InteractiveButton>
+            <InteractiveButton 
+              href="/climbing"
+              variant="outline"
+            >
+              クライミング辞典 - 応答願う
+            </InteractiveButton>
           </div>
         </div>
       </section>
