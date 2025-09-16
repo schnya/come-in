@@ -91,7 +91,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                We're constantly working on new projects. Stay tuned for more exciting features!
+                We&apos;re constantly working on new projects. Stay tuned for more exciting features!
               </p>
               <Button className="w-full" disabled>
                 Coming Soon
