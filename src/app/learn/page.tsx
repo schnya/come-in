@@ -105,6 +105,16 @@ const learningTopics = {
       difficulty: '中級',
       estimatedTime: '55分'
     }
+  ],
+  '言語学習': [
+    {
+      title: '自由英作文 上級者向けTips',
+      description: '高度な表現力と論理的思考を身につける上級英作文のテクニック',
+      href: '/learn/advanced-english-composition-tips',
+      features: ['論理的構成', '高度な語彙', '説得力のある議論', '修辞技法', '効果的な表現'],
+      difficulty: '上級',
+      estimatedTime: '60分'
+    }
   ]
 };
 
